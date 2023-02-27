@@ -53,6 +53,7 @@ class HeroService {
             if (!hero) {
                 throw new Error(`Hero with ID ${id} not found`);
             }
+            return hero;
         });
     }
     searchHeroByName(name) {

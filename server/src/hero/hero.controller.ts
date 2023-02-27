@@ -100,8 +100,8 @@ export default class HeroController implements Controller {
     ): Promise<Response | void> => {
         try {
             const id = req.params.id;
-            await this.heroService.deleteHero(id);
-            res.sendStatus(204);
+            const hero = await this.heroService.deleteHero(id);
+            res.status(200).json(hero);
         } catch (e: any) {
             next(new HttpException(400, e.message));
         }

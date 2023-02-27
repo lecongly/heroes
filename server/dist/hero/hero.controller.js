@@ -59,8 +59,8 @@ class HeroController {
         this.deleteHero = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const id = req.params.id;
-                yield this.heroService.deleteHero(id);
-                res.sendStatus(204);
+                const hero = yield this.heroService.deleteHero(id);
+                res.status(200).json(hero);
             }
             catch (e) {
                 next(new http_exception_1.default(400, e.message));

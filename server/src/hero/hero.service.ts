@@ -29,11 +29,12 @@ export default class HeroService {
         return hero;
     }
 
-    public async deleteHero(id: string): Promise<void> {
+    public async deleteHero(id: string): Promise<Hero> {
         const hero = await this.heroModel.findByIdAndDelete(id).exec();
         if (!hero) {
             throw new Error(`Hero with ID ${id} not found`);
         }
+        return hero
     }
 
     public async searchHeroByName(name: string): Promise<Hero[]> {
