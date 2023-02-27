@@ -3,16 +3,12 @@
   <thead *ngIf="heroes.length !== 0">
   <tr>
     <th scope="col">Name</th>
-    <th scope="col">Mail</th>
-    <th scope="col">Address</th>
     <th scope="col">Action</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let hero of heroes;odd as isOdd" [class.bg-light]="isOdd">
     <td>{{hero.name}}</td>
-    <td>{{hero.mail}}</td>
-    <td>{{hero.address}}</td>
     <td>
       <button type="button" class="btn btn-danger" title="delete hero"
               (click)="delete(hero)">Delete
