@@ -1,80 +1,29 @@
-<div *ngIf="hero">
-  <h2>{{ hero.name | uppercase }} Details</h2>
-  <div><span>ID: </span>{{ hero._id }}</div>
-
-  <div [formGroup]="form">
-    <div class="col-2 my-2">
-      <label for="hero-name">Hero name</label>
-      <input
-        [(ngModel)]="hero.name"
-        type="text"
-        class="form-control"
-        id="hero-name"
-        placeholder="Name"
-        formControlName="name"
-      />
-    </div>
-    <div class="col-2 my-2">
-      <label for="hero-gender">Hero gender</label>
-      <select
-        class="form-select"
-        aria-label="Default select example"
-        id="hero-gender"
-        [(ngModel)]="hero.gender"
-        [ngModelOptions]="{ standalone: true }"
-      >
-        <option value="0">Male</option>
-        <option value="1">Female</option>
-      </select>
-    </div>
-    <div class="col-2 my-2">
-      <label for="hero-mail">Hero mail</label>
-      <input
-        [class.is-invalid]="
-              form.get('email')?.invalid && form.get('email')?.touched
-            "
-        id="hero-mail"
-        type="email"
-        class="form-control"
-        formControlName="email"
-        [(ngModel)]="hero.mail"
-      />
-    </div>
-
-    <div *ngIf="email?.invalid" class="alert alert-danger col-2">
-      Please enter a valid email
-    </div>
-    <div class="col-2 my-2">
-      <label for="hero-age">Hero age</label>
-      <input
-        [(ngModel)]="hero.age"
-        type="text"
-        class="form-control"
-        id="hero-age"
-        placeholder="Age"
-        formControlName="age"
-      />
-    </div>
-    <div class="col-2 my-2">
-      <label for="hero-address">Hero address</label>
-      <input
-        [(ngModel)]="hero.address"
-        type="text"
-        class="form-control"
-        id="hero-address"
-        placeholder="Address"
-        formControlName="address"
-      />
-    </div>
-  </div>
-
-  <button type="button" class="btn btn-primary me-2" (click)="goBack()">Go back</button>
-  <button
-    type="button"
-    class="btn btn-warning"
-    (click)="save()"
-    [disabled]="email?.invalid || !form.dirty"
-  >
-    Save
-  </button>
+<div *ngIf="currentHero$ | async as currentHero">
+  <h2>{{ currentHero.name }}</h2>
+  <label>
+    Name:
+    <input [(ngModel)]="updatedHero.name">
+  </label>
+  <br>
+  <label>
+    Gender:
+    <input type="checkbox" [(ngModel)]="updatedHero.gender">
+  </label>
+  <br>
+  <label>
+    Email:
+    <input [(ngModel)]="updatedHero.mail">
+  </label>
+  <br>
+  <label>
+    Age:
+    <input type="number" [(ngModel)]="updatedHero.age">
+  </label>
+  <br>
+  <label>
+    Address:
+    <input [(ngModel)]="updatedHero.address">
+  </label>
+  <br>
+  <button (click)="updateHero()">Save</button>
 </div>

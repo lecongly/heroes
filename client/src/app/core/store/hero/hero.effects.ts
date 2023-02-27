@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {catchError, EMPTY, exhaustMap, map, mergeMap, of} from 'rxjs';
+import {catchError, exhaustMap, map, mergeMap, of} from 'rxjs';
 import {HeroService} from '../../services/hero/hero.service';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import * as heroActions from './hero.actions'
-import {error} from '@angular/compiler-cli/src/transformers/util';
 
 @Injectable()
 export class HeroEffects {

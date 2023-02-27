@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from '../hero';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
@@ -8,67 +8,45 @@ import {getHero, updateHero} from '../core/store/hero/hero.actions';
 import {currentHeroSelector} from '../core/store/hero/hero.selector';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HeroService} from '../core/services/hero/hero.service';
+import {Observable} from 'rxjs';
+import {AppState} from '../core/store/app.state';
 
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css']
 })
-export class HeroDetailComponent {
-  hero: Hero | null
-  heroForm: Hero | null
-
-  form: FormGroup;
-
-  get email() {
-    return this.form.get('email')
-  }
+export class HeroDetailComponent implements OnInit {
+  currentHero$: Observable<Hero | null>;
+  updatedHero: Hero = {_id: '', name: '', gender: false, mail: '', age: 0, address: ''};
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private store: Store,
-    private formBuilder: FormBuilder,
-    private heroService: HeroService
+    private store: Store<AppState>,
+    private fb: FormBuilder
   ) {
-    this.form = formBuilder.group({
-      name: "",
-      email: ["", Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
-      gender: "",
-      age: "",
-      address: "",
-    });
-    if (this.hero) {
-      this.heroForm = {...this.hero}
-    }
+    let id = this.route.snapshot.paramMap.get('id')!;
+    this.store.dispatch(getHero({id}));
+    this.currentHero$ = this.store.pipe(select(currentHeroSelector));
   }
 
   ngOnInit(): void {
-    this.getHero();
+    this.currentHero$.subscribe(hero => {
+      if (hero) {
+        this.updatedHero = {...hero};
+      }
+    });
   }
 
-
-  getHero(): void {
-    const id = this.route.snapshot.paramMap.get('id')!
-
-    this.store.dispatch(getHero({id}))
-
-    this.store.pipe(select(currentHeroSelector)).subscribe(hero => this.hero = hero)
-    // this.heroService.getHero(id)
-    //   .subscribe(hero => this.hero = hero);
+  updateHero(): void {
+    console.log(this.updatedHero)
+    this.store.dispatch(updateHero({hero: this.updatedHero}));
+    this.goBack()
   }
+
 
   goBack(): void {
     this.location.back();
-  }
-
-  save(): void {
-    if (this.hero) {
-      // this.heroService.updateHero(this.hero)
-      //   .subscribe(() => this.goBack());
-      console.log(this.hero)
-      // this.store.dispatch(updateHero(this.hero))
-
-    }
   }
 }
