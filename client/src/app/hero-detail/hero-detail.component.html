@@ -1,29 +1,46 @@
-<div *ngIf="currentHero$ | async as currentHero">
-  <h2>{{ currentHero.name }}</h2>
-  <label>
-    Name:
-    <input [(ngModel)]="updatedHero.name">
-  </label>
-  <br>
-  <label>
-    Gender:
-    <input type="checkbox" [(ngModel)]="updatedHero.gender">
-  </label>
-  <br>
-  <label>
-    Email:
-    <input [(ngModel)]="updatedHero.mail">
-  </label>
-  <br>
-  <label>
-    Age:
-    <input type="number" [(ngModel)]="updatedHero.age">
-  </label>
-  <br>
-  <label>
-    Address:
-    <input [(ngModel)]="updatedHero.address">
-  </label>
-  <br>
-  <button (click)="updateHero()">Save</button>
+<div *ngIf="hero">
+  <h2>{{hero.name}} details</h2>
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>
+        Name:
+        <input type="text" formControlName="name" required>
+      </label>
+      <div *ngIf="heroForm.get('name')?.invalid && heroForm.get('name')?.touched" class="alert alert-danger">
+        Name is required.
+      </div>
+    </div>
+    <div>
+      <label>
+        Gender:
+        <input type="radio" name="gender" value="male" formControlName="gender"> Male
+        <input type="radio" name="gender" value="female" formControlName="gender"> Female
+      </label>
+    </div>
+    <div>
+      <label>
+        Mail:
+        <input type="email" formControlName="mail">
+      </label>
+      <div *ngIf="heroForm.get('mail')?.invalid && heroForm.get('mail')?.touched" class="alert alert-danger">
+        Please enter a valid email
+      </div>
+    </div>
+    <div>
+      <label>
+        Age:
+        <input type="number" formControlName="age">
+      </label>
+      <div *ngIf="heroForm.get('age')?.invalid && heroForm.get('age')?.touched" class="alert alert-danger">
+        Age must be more than 0
+      </div>
+    </div>
+    <div>
+      <label>
+        Address:
+        <input type="text" formControlName="address">
+      </label>
+    </div>
+    <button type="submit" class="btn btn-warning" [disabled]="!heroForm.dirty || !heroForm.valid">Update</button>
+  </form>
 </div>
