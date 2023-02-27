@@ -32,7 +32,7 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit(): void {
     this.heroForm = this.formBuilder.group({
       name: ['', Validators.required],
-      gender: [''],
+      gender: [],
       mail: ['', Validators.email],
       age: ['', Validators.min(0)],
       address: ['']
