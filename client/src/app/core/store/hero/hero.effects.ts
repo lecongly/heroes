@@ -35,6 +35,13 @@ export class HeroEffects {
       catchError(error => of(heroActions.updateHeroFailed({error})))
     )
   )
+  deleteHero$ = createEffect(() => this.actions$.pipe(
+      ofType(heroActions.deleteHero),
+      mergeMap((action) => this.heroService.deleteHero(action.id)),
+      map(hero => heroActions.deleteHeroSuccess({id: hero._id})),
+      catchError(error => of(heroActions.deleteHeroFailed({error})))
+    )
+  )
 
   constructor(
     private actions$: Actions,
