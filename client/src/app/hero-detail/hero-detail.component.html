@@ -1,3 +1,7 @@
+<div *ngIf="(status$ | async) === 'loading'">
+  <div class="spinner-border" role="status">
+  </div>
+</div>
 <div *ngIf="hero">
   <h2>{{hero.name}} details</h2>
   <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
@@ -41,6 +45,8 @@
         <input type="text" formControlName="address">
       </label>
     </div>
-    <button type="submit" class="btn btn-warning" [disabled]="!heroForm.dirty || !heroForm.valid">Update</button>
+    <button *ngIf="(status$ | async) !== 'loading'" type="submit" class="btn btn-warning"
+            [disabled]="!heroForm.dirty || !heroForm.valid">Update
+    </button>
   </form>
 </div>

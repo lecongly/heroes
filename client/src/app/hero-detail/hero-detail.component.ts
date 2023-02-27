@@ -5,9 +5,10 @@ import {Location} from '@angular/common';
 
 import {select, Store} from '@ngrx/store';
 import {getHero, updateHero} from '../core/store/hero/hero.actions';
-import {currentHeroSelector} from '../core/store/hero/hero.selector';
+import {currentHeroSelector, heroStatusSelector} from '../core/store/hero/hero.selector';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppState} from '../core/store/app.state';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-hero-detail',
@@ -17,6 +18,7 @@ import {AppState} from '../core/store/app.state';
 export class HeroDetailComponent implements OnInit {
   heroForm!: FormGroup;
   hero!: Hero;
+  status$: Observable<string>;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,7 +51,7 @@ export class HeroDetailComponent implements OnInit {
         });
       }
     })
-
+    this.status$ = this.store.select(heroStatusSelector);
   }
 
   onSubmit(): void {

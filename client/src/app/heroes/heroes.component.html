@@ -1,3 +1,7 @@
+<div *ngIf="(status$ | async) === 'loading'" class="text-center">
+  <div class="spinner-border" role="status">
+  </div>
+</div>
 <table class="table">
   <h3 *ngIf="heroes.length === 0" class="text-center">Nobody hero</h3>
   <thead *ngIf="heroes.length !== 0">

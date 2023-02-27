@@ -1,3 +1,7 @@
+<div *ngIf="(status$ | async) === 'loading'" class="text-center">
+  <div class="spinner-border" role="status">
+  </div>
+</div>
 <h3>Top Heroes</h3>
 <div class="heroes-menu d-flex flex-column flex-lg-row justify-content-center gap-2 gap-lg-5p center mb-5">
   <a

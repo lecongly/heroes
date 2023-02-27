@@ -3,7 +3,8 @@ import {Hero} from '../hero';
 import {HeroService} from '../core/services/hero/hero.service';
 import {select, Store} from '@ngrx/store';
 import {deleteHero, getHeroes} from '../core/store/hero/hero.actions';
-import {heroesSelector} from '../core/store/hero/hero.selector';
+import {heroesSelector, heroStatusSelector} from '../core/store/hero/hero.selector';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-heroes',
@@ -12,12 +13,14 @@ import {heroesSelector} from '../core/store/hero/hero.selector';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
+  status$: Observable<string>;
 
   constructor(public heroService: HeroService, private store: Store) {
   }
 
   ngOnInit(): void {
     this.getHeroes();
+    this.status$ = this.store.select(heroStatusSelector);
   }
 
   getHeroes(): void {
