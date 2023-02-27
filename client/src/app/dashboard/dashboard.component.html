@@ -1,0 +1,11 @@
+<h3>Top Heroes</h3>
+<div class="heroes-menu d-flex flex-column flex-lg-row justify-content-center gap-2 gap-lg-5p center mb-5">
+  <a
+    class="bg-dark text-white p-3 text-decoration-none rounded w-75 m-auto text-center"
+    *ngFor="let hero of heroes"
+    routerLink="/detail/{{ hero._id }}"
+  >
+    {{ hero.name }}
+  </a>
+</div>
+<app-hero-search></app-hero-search>

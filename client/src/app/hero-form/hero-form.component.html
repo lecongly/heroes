@@ -1,0 +1,15 @@
+<div class="row col-6">
+  <h2>New hero</h2>
+  <form class="row" (submit)="add(heroName.value); heroName.value = ''">
+    <div class="form-group p-0">
+      <label for="name">Name: </label>
+      <input type="text" class="form-control m-0" id="name"
+             required
+             #heroName
+      >
+    </div>
+    <button type="submit" class="btn btn-success">
+      Submit
+    </button>
+  </form>
+</div>
