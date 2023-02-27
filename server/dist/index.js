@@ -6,5 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 require("dotenv/config");
 const hero_controller_1 = __importDefault(require("./hero/hero.controller"));
-const app = new app_1.default([new hero_controller_1.default()], 5000);
+const user_controller_1 = __importDefault(require("./user/user.controller"));
+const app = new app_1.default([new hero_controller_1.default(), new user_controller_1.default()], 5000);
 app.listen();
