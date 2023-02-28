@@ -18,6 +18,8 @@ import {StoreModule} from '@ngrx/store';
 import {CoreModule} from './core/utils/ core.module';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import {EffectsModule} from '@ngrx/effects';
     DashboardComponent,
     HeroSearchComponent,
     HeroFormComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     HttpClientModule,

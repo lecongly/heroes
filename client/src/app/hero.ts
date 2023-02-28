@@ -1,13 +1,3 @@
-// export class Hero {
-//   constructor(
-//     public _id ?: string,
-//     public name: string,
-//     public power: string,
-//     public alterEgo?: string
-//   ) {
-//   }
-// }
-
 export interface Hero {
   _id: string
   name: string;
@@ -16,3 +6,4 @@ export interface Hero {
   age: number;
   address: string;
 }
+

@@ -1,13 +1,16 @@
 import {NgModule} from '@angular/core';
 import {StoreModule} from '@ngrx/store';
-import {heroReducer} from '../store/hero/hero.reducer';
 import {EffectsModule} from '@ngrx/effects';
+import {heroReducer} from '../store/hero/hero.reducer';
 import {HeroEffects} from '../store/hero/hero.effects';
+import {authReducer} from '../store/auth/auth.reducer';
+import {AuthEffects} from '../store/auth/auth.effects';
 
 @NgModule({
   imports: [
     StoreModule.forFeature('feature_hero', heroReducer),
-    EffectsModule.forFeature([HeroEffects])
+    StoreModule.forFeature('feature_auth', authReducer),
+    EffectsModule.forFeature([HeroEffects, AuthEffects])
   ]
 })
 
