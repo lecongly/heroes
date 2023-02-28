@@ -70,7 +70,7 @@ export default class UserController implements Controller {
             const user = await this.userService.getUserById(
                 res.locals.token._id
             );
-            res.status(200).json({user})
+            res.status(200).json(user)
         } catch (error: any) {
             next(new HttpException(400, error.message));
         }
