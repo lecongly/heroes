@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import AuthService from '../../services/auth/auth.service';
 import * as authActions from './auth.actions'
-import {catchError, exhaustMap, map, of} from 'rxjs';
+import {catchError, exhaustMap, map, of, switchMap} from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
@@ -38,6 +38,20 @@ export class AuthEffects {
       )
     )
   );
+
+  fetchUser$ = createEffect(() => this.actions$.pipe(
+    ofType((authActions.fetchUser)),
+    switchMap(() => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return of(authActions.fetchUserFailed({error: 'Token not found in local storage.'}));
+      }
+      return this.authService.fetchUser(token).pipe(
+        map(user => authActions.fetchUserSuccess({user})),
+        catchError(error => of(authActions.fetchUserFailed({error})))
+      );
+    })
+  ));
 
   constructor(
     private actions$: Actions,

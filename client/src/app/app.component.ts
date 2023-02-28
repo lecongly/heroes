@@ -3,7 +3,7 @@ import {User} from './core/interface/user.interface';
 import {select, Store} from '@ngrx/store';
 import {heroesSelector} from './core/store/hero/hero.selector';
 import {userSelector} from './core/store/auth/auth.selector';
-import {logout} from './core/store/auth/auth.actions';
+import {fetchUser, logout} from './core/store/auth/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -23,5 +23,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.pipe(select(userSelector)).subscribe(user => this.user = user)
+    if (!this.user) {
+      this.store.dispatch(fetchUser());
+    }
   }
 }

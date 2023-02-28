@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, tap} from 'rxjs';
-import {UserResponse} from '../../interface/user.interface';
+import {User, UserResponse} from '../../interface/user.interface';
 import {Hero} from '../../../hero';
 
 @Injectable({
@@ -42,4 +42,11 @@ export default class AuthService {
     return of(true); // Return an observable with the logout status
   }
 
+
+  fetchUser(token: string): Observable<User> {
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    return this.http.get<User>(`${this.authUrl}/me`, {headers});
+  }
 }
