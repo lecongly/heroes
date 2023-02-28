@@ -39,12 +39,14 @@ const express_1 = __importDefault(require("express"));
 const mongoDB_1 = __importDefault(require("./utils/database/mongoDB"));
 const error_middleware_1 = __importStar(require("./middleware/error.middleware"));
 const cors_1 = __importDefault(require("cors"));
+const morgan_1 = __importDefault(require("morgan"));
 // import HttpException from './utils/exception/http.exception';
 class App {
     initialiseMiddleware() {
         this.express.use((0, cors_1.default)());
         this.express.use(express_1.default.json());
         this.express.use(express_1.default.urlencoded({ extended: false }));
+        this.express.use((0, morgan_1.default)("dev"));
         // this.express.use(bodyParser)
     }
     initialiseDatabase() {

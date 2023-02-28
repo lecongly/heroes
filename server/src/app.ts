@@ -3,6 +3,7 @@ import Controller from 'utils/interfaces/controller.interface';
 import mongoDB from './utils/database/mongoDB';
 import ErrorMiddleware, {notFoundRoute} from './middleware/error.middleware';
 import cors from 'cors';
+import morgan from 'morgan';
 import bodyParser from 'body-parser';
 
 // import HttpException from './utils/exception/http.exception';
@@ -15,6 +16,7 @@ class App {
         this.express.use(cors());
         this.express.use(express.json())
         this.express.use(express.urlencoded({extended: false}));
+        this.express.use(morgan("dev"))
         // this.express.use(bodyParser)
     }
 
