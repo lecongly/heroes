@@ -37,7 +37,7 @@ export default class HeroService {
     public async deleteHero(id: string, userId: string): Promise<Hero> {
         const hero = await this.heroModel.findOneAndDelete({_id: id, user: userId}).exec();
         if (!hero) {
-            throw new Error(`You are not allowed to delete hero with ID ${id}`);
+            throw new Error(`You are not allowed to delete hero with ID  ${id} `);
         }
         return hero
     }

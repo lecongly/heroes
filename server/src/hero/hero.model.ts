@@ -1,5 +1,4 @@
-import {model, Schema, Document, Types} from 'mongoose';
-import {User} from '../user/user.model';
+import {model, Schema, Document} from 'mongoose';
 
 export interface Hero extends Document {
     name: string;
@@ -7,7 +6,7 @@ export interface Hero extends Document {
     mail: string;
     age: number;
     address: string;
-    user: User;
+    user: string;
 }
 
 
@@ -18,10 +17,7 @@ const HeroSchema = new Schema(
         mail: String,
         age: Number,
         address: String,
-        user: {
-            type: Types.ObjectId,
-            ref: "User",
-        },
+        user: String,
     }
 )
 
