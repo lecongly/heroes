@@ -13,7 +13,13 @@ class App {
     private port: number
 
     private initialiseMiddleware(): void {
-        this.express.use(cors());
+        this.express.use(
+            cors({
+                // origin: "http://localhost:4200", // allow to server to accept request from different origin
+                // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+                // credentials: true, // allow session cookie from browser to pass through
+            })
+        );
         this.express.use(express.json())
         this.express.use(express.urlencoded({extended: false}));
         this.express.use(morgan("dev"))
