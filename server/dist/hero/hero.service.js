@@ -23,9 +23,15 @@ class HeroService {
             return heroes;
         });
     }
-    createHero(name) {
+    getHeroesByUserId(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newHero = yield this.heroModel.create({ name });
+            const heroes = yield this.heroModel.find({ user: userId }).exec();
+            return heroes;
+        });
+    }
+    createHero(name, userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newHero = yield this.heroModel.create({ name, user: userId });
             return newHero;
         });
     }
@@ -38,20 +44,20 @@ class HeroService {
             return hero;
         });
     }
-    updateHero(id, update) {
+    updateHero(id, update, userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const hero = yield this.heroModel.findByIdAndUpdate(id, update, { new: true });
+            const hero = yield this.heroModel.findOneAndUpdate({ _id: id, user: userId }, update);
             if (!hero) {
-                throw new Error(`Hero with ID ${id} not found`);
+                throw new Error(`You are not allowed to update hero with ID ${id}`);
             }
             return hero;
         });
     }
-    deleteHero(id) {
+    deleteHero(id, userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const hero = yield this.heroModel.findByIdAndDelete(id).exec();
+            const hero = yield this.heroModel.findOneAndDelete({ _id: id, user: userId }).exec();
             if (!hero) {
-                throw new Error(`Hero with ID ${id} not found`);
+                throw new Error(`You are not allowed to delete hero with ID ${id}`);
             }
             return hero;
         });

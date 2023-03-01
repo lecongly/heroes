@@ -6,6 +6,10 @@ const HeroSchema = new mongoose_1.Schema({
     gender: Boolean,
     mail: String,
     age: Number,
-    address: String
+    address: String,
+    user: {
+        type: mongoose_1.Types.ObjectId,
+        ref: "User",
+    },
 });
 exports.default = (0, mongoose_1.model)('Hero', HeroSchema);
