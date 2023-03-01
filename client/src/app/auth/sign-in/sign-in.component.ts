@@ -28,6 +28,6 @@ export class SignInComponent {
   loginUser() {
     const {email, password} = this.signInForm.value
     this.store.dispatch(login({email, password}))
-    this.router.navigateByUrl("/")
+    // this.router.navigateByUrl("/")
   }
 }

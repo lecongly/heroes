@@ -2,14 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, tap} from 'rxjs';
 import {User, UserResponse} from '../../interface/user.interface';
-import {Hero} from '../../../hero';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export default class AuthService {
-  private authUrl = 'http://localhost:5000/api/users';
+  private authUrl = 'http://localhost:3000/api/users';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'Application/json'})

@@ -20,6 +20,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HeroCardComponent } from './heroes/hero-card/hero-card.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
     HeroFormComponent,
     SignInComponent,
     SignUpComponent,
+    ProfileComponent,
+    HeroCardComponent,
   ],
   imports: [
     HttpClientModule,

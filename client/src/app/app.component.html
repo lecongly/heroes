@@ -24,22 +24,21 @@
           <li class="nav-item">
             <a class="nav-link active fs-5" routerLink="/heroes">Heroes</a>
           </li>
-          <div *ngIf="user">
-            <li class="nav-item">
-              <a class="nav-link active fs-5" routerLink="/user/{{ user._id }}/my-heroes"
-              >My Heroes</a
-              >
-            </li>
-          </div>
+          <!--          <div *ngIf="user">-->
+          <!--            <li class="nav-item">-->
+          <!--              <a class="nav-link active fs-5" routerLink="/user/{{ user._id }}/my-heroes"-->
+          <!--              >My Heroes</a-->
+          <!--              >-->
+          <!--            </li>-->
+          <!--          </div>-->
         </ul>
       </div>
       <div *ngIf="!user">
-        <button type="button" class="btn btn-primary" routerLink="/sign-in">Login</button>
-        <button type="button" class="btn btn-outline-primary" routeLink="/sign-up">Register</button>
+        <button type="button" class="btn btn-primary" routerLink="/sign-in">Sign In</button>
       </div>
       <div *ngIf="user">
-        <span class="name_user">User: {{ user.name || user.email }}</span>
-        <button type="button" class="btn btn-primary" (click)="logout()">
+        <button type="button" class="btn btn-primary" routerLink="/user/{{ user._id }}">{{ user.name }}</button>
+        <button type="button" class="btn btn-outline-primary" (click)="logout()">
           Logout
         </button>
       </div>
